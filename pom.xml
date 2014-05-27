@@ -12,8 +12,8 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-        <minecraft.version>1.7.2</minecraft.version>
-        <bukkit.version>R0.2</bukkit.version>
+        <minecraft.version>1.7.9</minecraft.version>
+        <bukkit.version>R0.1</bukkit.version>
     </properties>
 
     <repositories>
