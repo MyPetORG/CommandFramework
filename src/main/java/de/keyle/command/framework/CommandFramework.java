@@ -35,7 +35,7 @@ import java.util.Map.Entry;
 import static java.util.AbstractMap.SimpleEntry;
 
 public class CommandFramework {
-    private Map<String, Entry<Method, Object>> commandMap = new HashMap<String, Entry<Method, Object>>();
+    private Map<String, Entry<Method, Object>> commandMap = new HashMap<>();
     private CommandMap bukkitCommandMap;
     private Plugin plugin;
 
@@ -52,13 +52,7 @@ public class CommandFramework {
                 Field field = SimplePluginManager.class.getDeclaredField("commandMap");
                 field.setAccessible(true);
                 bukkitCommandMap = (CommandMap) field.get(pluginManager);
-            } catch (IllegalArgumentException e) {
-                e.printStackTrace();
-            } catch (SecurityException e) {
-                e.printStackTrace();
-            } catch (IllegalAccessException e) {
-                e.printStackTrace();
-            } catch (NoSuchFieldException e) {
+            } catch (IllegalArgumentException | SecurityException | IllegalAccessException | NoSuchFieldException e) {
                 e.printStackTrace();
             }
         }
@@ -75,7 +69,7 @@ public class CommandFramework {
      */
     public boolean handleCommand(CommandSender sender, String label, org.bukkit.command.Command cmd, String[] args) {
         StringBuilder commandName = new StringBuilder();
-        List<String> arguments = new ArrayList<String>();
+        List<String> arguments = new ArrayList<>();
         arguments.add(label);
         arguments.addAll(Arrays.asList(args));
 
@@ -104,11 +98,7 @@ public class CommandFramework {
             }
             try {
                 entry.getKey().invoke(entry.getValue(), new CommandArgs(sender, cmd, Collections.unmodifiableList(arguments)));
-            } catch (IllegalArgumentException e) {
-                e.printStackTrace();
-            } catch (IllegalAccessException e) {
-                e.printStackTrace();
-            } catch (InvocationTargetException e) {
+            } catch (IllegalArgumentException | IllegalAccessException | InvocationTargetException e) {
                 e.printStackTrace();
             }
             return true;
@@ -152,7 +142,7 @@ public class CommandFramework {
     }
 
     private void registerCommand(Command commandInfo, String label, Method method, Object obj) {
-        commandMap.put(label.toLowerCase(), new SimpleEntry<Method, Object>(method, obj));
+        commandMap.put(label.toLowerCase(), new SimpleEntry<>(method, obj));
         String commandName = label.split("\\.")[0].toLowerCase();
 
         org.bukkit.command.Command command = bukkitCommandMap.getCommand(commandName);

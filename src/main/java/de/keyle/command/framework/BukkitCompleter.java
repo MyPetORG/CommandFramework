@@ -30,18 +30,17 @@ import java.util.*;
 import java.util.Map.Entry;
 
 public class BukkitCompleter implements TabCompleter {
-    private static List<String> emptyList = new ArrayList<String>();
-    private Map<String, Entry<Method, Object>> completers = new HashMap<String, Entry<Method, Object>>();
+    public static List<String> EMPTY_LIST = Collections.unmodifiableList(new ArrayList<String>());
+    private Map<String, Entry<Method, Object>> completers = new HashMap<>();
 
     public void addCompleter(String label, Method m, Object obj) {
-        completers.put(label, new AbstractMap.SimpleEntry<Method, Object>(m, obj));
+        completers.put(label, new AbstractMap.SimpleEntry<>(m, obj));
     }
 
     @SuppressWarnings("unchecked")
-    @Override
     public List<String> onTabComplete(CommandSender sender, Command command, String label, String[] args) {
         StringBuilder commandName = new StringBuilder();
-        List<String> arguments = new ArrayList<String>();
+        List<String> arguments = new ArrayList<>();
         arguments.add(label);
         arguments.addAll(Arrays.asList(args));
         if (args.length > 0) {
@@ -68,14 +67,10 @@ public class BukkitCompleter implements TabCompleter {
             Entry<Method, Object> entry = completers.get(lastCommand);
             try {
                 return (List<String>) entry.getKey().invoke(entry.getValue(), new CommandArgs(sender, command, arguments));
-            } catch (IllegalArgumentException e) {
-                e.printStackTrace();
-            } catch (IllegalAccessException e) {
-                e.printStackTrace();
-            } catch (InvocationTargetException e) {
+            } catch (IllegalArgumentException | IllegalAccessException | InvocationTargetException e) {
                 e.printStackTrace();
             }
         }
-        return emptyList;
+        return EMPTY_LIST;
     }
 }

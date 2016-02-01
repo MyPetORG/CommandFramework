@@ -7,19 +7,19 @@
     <groupId>de.keyle</groupId>
     <artifactId>command-framework</artifactId>
     <name>Command-Framework</name>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.1</version>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-        <minecraft.version>1.7.9</minecraft.version>
-        <bukkit.version>R0.1</bukkit.version>
+        <minecraft.version>1.8.8</minecraft.version>
+        <bukkit.version>R0.1-SNAPSHOT</bukkit.version>
     </properties>
 
     <repositories>
         <repository>
-            <id>bukkit-repo</id>
-            <url>http://repo.bukkit.org/content/groups/public/</url>
+            <id>spigot-repo</id>
+            <url>https://hub.spigotmc.org/nexus/content/groups/public/</url>
         </repository>
     </repositories>
 

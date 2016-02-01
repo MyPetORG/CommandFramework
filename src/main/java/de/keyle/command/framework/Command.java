@@ -33,40 +33,40 @@ public @interface Command {
      *
      * @return The name
      */
-    public String name();
+    String name();
 
     /**
      * Gets the required permission of the command
      *
      * @return The permission
      */
-    public String permission() default "";
+    String permission() default "";
 
     /**
      * The message sent to the player when they do not have permission to execute it
      *
      * @return The message
      */
-    public String noPerm() default "You do not have permission to perform that action";
+    String noPerm() default "You do not have permission to perform that action";
 
     /**
      * A list of alternate names that the command is executed under.
      *
      * @return Array of all aliases
      */
-    public String[] aliases() default {};
+    String[] aliases() default {};
 
     /**
      * The description that will appear in /help of the command
      *
      * @return The description of this command
      */
-    public String description() default "";
+    String description() default "";
 
     /**
      * The usage that will appear in /help
      *
      * @return The usage description of this command
      */
-    public String usage() default "";
+    String usage() default "";
 }
